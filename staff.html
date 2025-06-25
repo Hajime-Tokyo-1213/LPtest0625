@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スタッフ紹介 - PET SALON Cheri（シェリー）</title>
+    <meta name="description" content="PET SALON Cheri（シェリー）のスタッフ紹介ページ。経験豊富なトリマーが、愛情を込めて大切な家族をお迎えします。">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome (for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* --- Reset & Basic Settings --- */
+        :root {
+            --primary-color: #8D9B6A;
+            --secondary-color: #F7F5F2;
+            --text-color: #5d5d5d;
+            --heading-color: #4a4a4a;
+            --accent-color: #DAB88B;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--text-color);
+            background-color: var(--secondary-color);
+            line-height: 1.8;
+            padding-top: 98px; /* Fixed header height */
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none; /* Add this line to remove bullets */
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* --- Header (from Main LP) --- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+            padding: 15px 0;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        .header.scrolled {
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 10px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 40px;
+            gap: 40px;
+        }
+
+        .header-logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            color: #fff;
+            line-height: 1.1;
+            font-size: 1.2rem;
+            text-align: center;
+            transition: color 0.4s ease;
+            flex-shrink: 0;
+        }
+        
+        .header.scrolled .header-logo {
+             background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .header-logo span {
+            font-size: 2.8rem;
+            display: block;
+        }
+        
+        .header-right-group {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .header-nav ul {
+            display: flex;
+            gap: 20px;
+        }
+
+        .header-nav a {
+            position: relative;
+            padding: 5px 0;
+            transition: transform 0.3s ease, color 0.3s ease;
+            display: block;
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        
+        .header.scrolled .header-nav a {
+            color: var(--text-color);
+        }
+
+        .header-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #fff;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+        
+        .header.scrolled .header-nav a::after {
+            background-color: var(--primary-color);
+        }
+
+        .header-nav a:hover {
+            color: var(--accent-color);
+        }
+        
+        .header.scrolled .header-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .header-nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .header-contact-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-left: 1px solid rgba(255,255,255,0.4);
+            padding-left: 25px;
+            transition: border-color 0.4s ease;
+        }
+
+        .header.scrolled .header-contact-info {
+            border-left-color: #e0e0e0;
+        }
+
+        .header-tel {
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #fff;
+            transition: color 0.4s ease;
+            white-space: nowrap;
+        }
+        
+        .header.scrolled .header-tel {
+            color: var(--text-color);
+        }
+
+        .header-tel:hover {
+            color: var(--accent-color);
+        }
+        
+        .header.scrolled .header-tel:hover {
+             color: var(--primary-color);
+        }
+
+        .header-tel i {
+            margin-right: 5px;
+        }
+        
+        .header-sns {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .header-sns a {
+            font-size: 1rem;
+            color: #fff;
+            transition: transform 0.3s ease, color 0.4s ease;
+        }
+        
+        .header.scrolled .header-sns a {
+            color: var(--text-color);
+        }
+
+        .header-sns a:hover {
+            transform: scale(1.2);
+            color: var(--accent-color);
+        }
+        
+        .header.scrolled .header-sns a:hover {
+            color: var(--primary-color);
+        }
+
+        main {
+            padding: 80px 0;
+        }
+        
+        .page-title-container {
+            position: relative;
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 60px 20px;
+            border-radius: 10px;
+            background-image: url('Staff.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .page-title-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            z-index: 1;
+        }
+
+        .page-title-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .page-subtitle {
+             color: var(--accent-color);
+             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            font-weight: bold;
+        }
+
+        /* Staff Section */
+        .staff-member {
+            display: flex;
+            gap: 40px;
+            background: #F8FBF6; /* カード背景を淡いグリーンに変更 */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+            margin-bottom: 50px;
+            align-items: center;
+        }
+
+        .staff-member:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .staff-photo {
+            flex-shrink: 0;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid #fff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .staff-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .staff-details {
+            flex-grow: 1;
+        }
+        
+        .staff-title {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 0;
+        }
+
+        .staff-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--heading-color);
+            margin-bottom: 20px;
+        }
+
+        .staff-bio {
+            margin-bottom: 20px;
+        }
+        
+        .staff-more-info {
+            background-color: #fff; /* 詳細情報の背景は白にしてメリハリを */
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #E0E0E0;
+        }
+
+        .staff-more-info p {
+            margin: 0;
+            padding: 5px 0;
+        }
+        
+        .staff-more-info strong {
+            color: var(--primary-color);
+            margin-right: 1em;
+            display: inline-block;
+            width: 80px;
+        }
+
+        /* --- Footer (same as LP) --- */
+        .footer {
+            background-color: var(--heading-color);
+            color: #f0f0f0;
+            padding: 40px 0;
+            text-align: center;
+        }
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .footer p {
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .staff-member, .staff-member:nth-child(even) {
+                flex-direction: column;
+                padding: 30px 20px;
+            }
+            .staff-photo {
+                width: 200px;
+                height: 200px;
+            }
+            .staff-details {
+                text-align: center;
+            }
+            .page-title {
+                font-size: 2.5rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="header-container">
+            <a href="main.html" class="header-logo">PET SALON<span>Cheri</span></a>
+            <div class="header-right-group">
+                <nav class="header-nav">
+                    <ul>
+                        <li><a href="main.html">HOME</a></li>
+                        <li><a href="main.html#salon-info">サロン案内</a></li>
+                        <li><a href="Trimming.html">トリミング料金</a></li>
+                        <li><a href="hotel.html">ペットホテル料金</a></li>
+                        <li><a href="staff.html">スタッフ紹介</a></li>
+                        <li><a href="dog.html">スタッフ犬紹介</a></li>
+                        <li><a href="Contact.html">お問い合わせ</a></li>
+                    </ul>
+                </nav>
+                <div class="header-contact-info">
+                    <a href="tel:012-345-6789" class="header-tel">
+                        <i class="fas fa-phone-alt"></i> 012-345-6789
+                    </a>
+                    <div class="header-sns">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-title-container">
+                <div class="page-title-content">
+                    <h1 class="page-title">Our Staff</h1>
+                    <p class="page-subtitle">スタッフ紹介</p>
+                </div>
+            </div>
+
+            <article class="staff-member">
+                <div class="staff-photo">
+                    <img src="T1.jpg" alt="日本人女性スタッフ1">
+                </div>
+                <div class="staff-details">
+                    <p class="staff-title">オーナー / チーフトリマー</p>
+                    <h3 class="staff-name">田中 由紀</h3>
+                    <p class="staff-bio">
+                        わんちゃん・ねこちゃんが心からリラックスできる、第二のおうちのような場所を目指しています。長年の経験を活かし、一頭いっとうの個性と健康を第一に考えた、愛情たっぷりのケアをお約束します。
+                    </p>
+                    <div class="staff-more-info">
+                        <p><strong>トリマー歴:</strong> 15年</p>
+                        <p><strong>保有資格:</strong> JKC公認トリマーA級、愛玩動物飼養管理士1級</p>
+                        <p><strong>得意なこと:</strong> シニア犬のケア、皮膚トラブルの相談</p>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="staff-member">
+                <div class="staff-photo">
+                    <img src="T2.jpg" alt="日本人女性スタッフ2">
+                </div>
+                <div class="staff-details">
+                    <p class="staff-title">トリマー</p>
+                    <h3 class="staff-name">鈴木 真央</h3>
+                    <p class="staff-bio">
+                        飼い主様のご希望を丁寧にヒアリングし、わんちゃんの「可愛い」を最大限に引き出すお手伝いをさせていただきます。シャンプーが苦手な子も、少しずつ慣れていけるように優しくサポートしますので、安心してお任せください。
+                    </p>
+                     <div class="staff-more-info">
+                        <p><strong>トリマー歴:</strong> 7年</p>
+                        <p><strong>保有資格:</strong> JKC公認トリマーB級、ペットエステティシャン</p>
+                        <p><strong>得意なこと:</strong> デザインカット、ふわふわスタイル</p>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="staff-member">
+                <div class="staff-photo">
+                    <img src="T3.jpg" alt="日本人女性スタッフ3">
+                </div>
+                <div class="staff-details">
+                    <p class="staff-title">トリマー / ホテルスタッフ</p>
+                    <h3 class="staff-name">佐藤 彩香</h3>
+                    <p class="staff-bio">
+                        わんちゃん達が楽しく安全に過ごせるよう、いつも笑顔で接することを心がけています。トリミングでは、その子の負担にならないよう、スピーディーかつ丁寧な施術を大切にしています。ホテルのお世話もお任せください。
+                    </p>
+                     <div class="staff-more-info">
+                        <p><strong>トリマー歴:</strong> 5年</p>
+                        <p><strong>保有資格:</strong> JKC公認トリマーC級、ドッグトレーナー</p>
+                        <p><strong>得意なこと:</strong> パピーの初めてのトリミング、遊びを通したトレーニング</p>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">PET SALON Cheri</div>
+            <p>&copy; 2025 PET SALON Cheri. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Header Scroll Effect ---
+            const header = document.querySelector('.header');
+            if(header){
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

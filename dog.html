@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スタッフ犬紹介 - PET SALON Cheri（シェリー）</title>
+    <meta name="description" content="PET SALON Cheri（シェリー）の看板犬たちをご紹介！元気いっぱいのスタッフ犬たちが、皆様をお出迎えします。">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome (for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* --- Reset & Basic Settings --- */
+        :root {
+            --primary-color: #8D9B6A;
+            --secondary-color: #F7F5F2;
+            --text-color: #5d5d5d;
+            --heading-color: #4a4a4a;
+            --accent-color: #DAB88B;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--text-color);
+            background-color: var(--secondary-color);
+            line-height: 1.8;
+            padding-top: 98px; /* Fixed header height */
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* --- Header (from Main LP) --- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+            padding: 15px 0;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        .header.scrolled {
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 10px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 40px;
+            gap: 40px;
+        }
+
+        .header-logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            color: #fff;
+            line-height: 1.1;
+            font-size: 1.2rem;
+            text-align: center;
+            transition: color 0.4s ease;
+            flex-shrink: 0;
+        }
+        
+        .header.scrolled .header-logo {
+             background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .header-logo span {
+            font-size: 2.8rem;
+            display: block;
+        }
+        
+        .header-right-group {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .header-nav ul {
+            display: flex;
+            gap: 20px;
+        }
+
+        .header-nav a {
+            position: relative;
+            padding: 5px 0;
+            transition: transform 0.3s ease, color 0.3s ease;
+            display: block;
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        
+        .header.scrolled .header-nav a {
+            color: var(--text-color);
+        }
+
+        .header-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #fff;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+        
+        .header.scrolled .header-nav a::after {
+            background-color: var(--primary-color);
+        }
+
+        .header-nav a:hover {
+            color: var(--accent-color);
+        }
+        
+        .header.scrolled .header-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .header-nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .header-contact-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-left: 1px solid rgba(255,255,255,0.4);
+            padding-left: 25px;
+            transition: border-color 0.4s ease;
+        }
+
+        .header.scrolled .header-contact-info {
+            border-left-color: #e0e0e0;
+        }
+
+        .header-tel {
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #fff;
+            transition: color 0.4s ease;
+            white-space: nowrap;
+        }
+        
+        .header.scrolled .header-tel {
+            color: var(--text-color);
+        }
+
+        .header-tel:hover {
+            color: var(--accent-color);
+        }
+        
+        .header.scrolled .header-tel:hover {
+             color: var(--primary-color);
+        }
+
+        .header-tel i {
+            margin-right: 5px;
+        }
+        
+        .header-sns {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .header-sns a {
+            font-size: 1rem;
+            color: #fff;
+            transition: transform 0.3s ease, color 0.4s ease;
+        }
+        
+        .header.scrolled .header-sns a {
+            color: var(--text-color);
+        }
+
+        .header-sns a:hover {
+            transform: scale(1.2);
+            color: var(--accent-color);
+        }
+        
+        .header.scrolled .header-sns a:hover {
+            color: var(--primary-color);
+        }
+
+
+        main {
+            padding: 80px 0;
+        }
+        
+        .page-title-container {
+            position: relative;
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 60px 20px;
+            border-radius: 10px;
+            background-image: url('dog.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .page-title-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            z-index: 1;
+        }
+
+        .page-title-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .page-subtitle {
+             color: var(--accent-color);
+             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            font-weight: bold;
+        }
+        
+        /* Staff Dog Section */
+        .staff-dog-member {
+            display: flex;
+            gap: 40px;
+            background: #FFF9F0;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+            margin-bottom: 50px;
+            align-items: center;
+        }
+        
+        .staff-dog-member.leo-card {
+            background: #F0F5FA; 
+        }
+
+        .staff-dog-member:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .staff-dog-photo {
+            flex-shrink: 0;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid #fff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .staff-dog-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .staff-dog-details {
+            flex-grow: 1;
+        }
+        
+        .staff-dog-title {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 0;
+        }
+
+        .staff-dog-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--heading-color);
+            margin-bottom: 20px;
+        }
+
+        .staff-dog-bio {
+            margin-bottom: 20px;
+        }
+        
+        .staff-dog-more-info {
+            background-color: #fff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #eee;
+        }
+
+        .staff-dog-more-info p {
+            margin: 0;
+            padding: 5px 0;
+        }
+        
+        .staff-dog-more-info strong {
+            color: var(--primary-color);
+            margin-right: 1em;
+            display: inline-block;
+            width: 80px;
+        }
+
+        /* --- Footer (same as LP) --- */
+        .footer {
+            background-color: var(--heading-color);
+            color: #f0f0f0;
+            padding: 40px 0;
+            text-align: center;
+        }
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .footer p {
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .staff-dog-member, .staff-dog-member:nth-child(even) {
+                flex-direction: column;
+                padding: 30px 20px;
+            }
+            .staff-dog-photo {
+                width: 200px;
+                height: 200px;
+            }
+            .staff-dog-details {
+                text-align: center;
+            }
+            .page-title {
+                font-size: 2.5rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="header-container">
+            <a href="main.html" class="header-logo">PET SALON<span>Cheri</span></a>
+            <div class="header-right-group">
+                <nav class="header-nav">
+                    <ul>
+                        <li><a href="main.html">HOME</a></li>
+                        <li><a href="main.html#salon-info">サロン案内</a></li>
+                        <li><a href="Trimming.html">トリミング料金</a></li>
+                        <li><a href="hotel.html">ペットホテル料金</a></li>
+                        <li><a href="staff.html">スタッフ紹介</a></li>
+                        <li><a href="dog.html">スタッフ犬紹介</a></li>
+                        <li><a href="Contact.html">お問い合わせ</a></li>
+                    </ul>
+                </nav>
+                <div class="header-contact-info">
+                    <a href="tel:012-345-6789" class="header-tel">
+                        <i class="fas fa-phone-alt"></i> 012-345-6789
+                    </a>
+                    <div class="header-sns">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-title-container">
+                <div class="page-title-content">
+                    <h1 class="page-title">Our Family</h1>
+                    <p class="page-subtitle">スタッフ犬紹介</p>
+                </div>
+            </div>
+
+            <article class="staff-dog-member leo-card">
+                <div class="staff-dog-photo">
+                    <img src="dog1.jpg" alt="看板犬 レオ">
+                </div>
+                <div class="staff-dog-details">
+                    <p class="staff-dog-title">おっとり癒し系</p>
+                    <h3 class="staff-dog-name">レオ</h3>
+                    <p class="staff-dog-bio">
+                        マイペースでおっとりした性格の男の子。お客様の足元で静かにくつろいでいることが多いですが、おやつを見せると目を輝かせます。人もわんちゃんも大好きな、サロンの癒し担当です。
+                    </p>
+                    <div class="staff-dog-more-info">
+                        <p><strong>犬　種:</strong> シェルティ</p>
+                        <p><strong>性　別:</strong> 男の子</p>
+                        <p><strong>好きなこと:</strong> 日向ぼっこ、お昼寝、やわらかいおやつ</p>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="staff-dog-member">
+                <div class="staff-dog-photo">
+                    <img src="dog2.jpg" alt="看板犬 ラテ">
+                </div>
+                <div class="staff-dog-details">
+                    <p class="staff-dog-title">元気いっぱいムードメーカー</p>
+                    <h3 class="staff-dog-name">ラテ</h3>
+                    <p class="staff-dog-bio">
+                        ボール遊びが大好きで、いつでも元気いっぱいの女の子。人が来るとしっぽを振ってお出迎えするのが得意です。ちょっぴりシャイな子の心も開かせる、遊びの天才です。
+                    </p>
+                     <div class="staff-dog-more-info">
+                        <p><strong>犬　種:</strong> トイ・プードル</p>
+                        <p><strong>性　別:</strong> 女の子</p>
+                        <p><strong>好きなこと:</strong> ボール投げ、ドッグランで全力疾走</p>
+                    </div>
+                </div>
+            </article>
+            
+            <article class="staff-dog-member">
+                <div class="staff-dog-photo">
+                    <img src="dog3.jpg" alt="看板犬 ココ">
+                </div>
+                <div class="staff-dog-details">
+                    <p class="staff-dog-title">甘えん坊な末っ子</p>
+                    <h3 class="staff-dog-name">ココ</h3>
+                    <p class="staff-dog-bio">
+                        一番年下で、人が大好きな甘えん坊。抱っこされるのが大好きで、自分から膝の上に乗ってくることも。その可愛さで、スタッフもお客様もメロメロにしています。
+                    </p>
+                     <div class="staff-dog-more-info">
+                        <p><strong>犬　種:</strong> ポメラニアン</p>
+                        <p><strong>性　別:</strong> 女の子</p>
+                        <p><strong>好きなこと:</strong> 抱っこ、スタッフのあとをついて歩くこと</p>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">PET SALON Cheri</div>
+            <p>&copy; 2025 PET SALON Cheri. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Header Scroll Effect ---
+            const header = document.querySelector('.header');
+            if(header){
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>

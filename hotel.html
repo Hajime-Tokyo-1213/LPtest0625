@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ペットホテル料金 - PET SALON Cheri（シェリー）</title>
+    <meta name="description" content="PET SALON Cheri（シェリー）のペットホテル料金ページ。個室・ドッグラン完備で安心・快適な滞在をお約束します。">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome (for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* --- Reset & Basic Settings --- */
+        :root {
+            --primary-color: #8D9B6A;
+            --secondary-color: #F7F5F2;
+            --text-color: #5d5d5d;
+            --heading-color: #4a4a4a;
+            --accent-color: #DAB88B;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--text-color);
+            background-color: var(--secondary-color);
+            line-height: 1.8;
+            padding-top: 98px; /* Fixed header height */
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* --- Header (from Main LP) --- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+            padding: 15px 0;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        .header.scrolled {
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 10px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 40px;
+            gap: 40px;
+        }
+
+        .header-logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            color: #fff;
+            line-height: 1.1;
+            font-size: 1.2rem;
+            text-align: center;
+            transition: color 0.4s ease;
+            flex-shrink: 0;
+        }
+        
+        .header.scrolled .header-logo {
+             background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .header-logo span {
+            font-size: 2.8rem;
+            display: block;
+        }
+        
+        .header-right-group {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .header-nav ul {
+            display: flex;
+            gap: 20px;
+        }
+
+        .header-nav a {
+            position: relative;
+            padding: 5px 0;
+            transition: transform 0.3s ease, color 0.3s ease;
+            display: block;
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        
+        .header.scrolled .header-nav a {
+            color: var(--text-color);
+        }
+
+        .header-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #fff;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+        
+        .header.scrolled .header-nav a::after {
+            background-color: var(--primary-color);
+        }
+
+        .header-nav a:hover {
+            color: var(--accent-color);
+        }
+        
+        .header.scrolled .header-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .header-nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .header-contact-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-left: 1px solid rgba(255,255,255,0.4);
+            padding-left: 25px;
+            transition: border-color 0.4s ease;
+        }
+
+        .header.scrolled .header-contact-info {
+            border-left-color: #e0e0e0;
+        }
+
+        .header-tel {
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: #fff;
+            transition: color 0.4s ease;
+            white-space: nowrap;
+        }
+        
+        .header.scrolled .header-tel {
+            color: var(--text-color);
+        }
+
+        .header-tel:hover {
+            color: var(--accent-color);
+        }
+        
+        .header.scrolled .header-tel:hover {
+             color: var(--primary-color);
+        }
+
+        .header-tel i {
+            margin-right: 5px;
+        }
+        
+        .header-sns {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .header-sns a {
+            font-size: 1rem;
+            color: #fff;
+            transition: transform 0.3s ease, color 0.4s ease;
+        }
+        
+        .header.scrolled .header-sns a {
+            color: var(--text-color);
+        }
+
+        .header-sns a:hover {
+            transform: scale(1.2);
+            color: var(--accent-color);
+        }
+        
+        .header.scrolled .header-sns a:hover {
+            color: var(--primary-color);
+        }
+
+
+        main {
+            padding: 80px 0;
+        }
+        
+        .page-title-container {
+            position: relative;
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 60px 20px;
+            border-radius: 10px;
+            background-image: url('hotel_price.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .page-title-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            z-index: 1;
+        }
+
+        .page-title-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .page-subtitle {
+             color: var(--accent-color);
+             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            font-weight: bold;
+        }
+
+        .section {
+            background: #fff;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+            margin-bottom: 50px;
+        }
+        
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title-h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Feature Section */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            align-items: center;
+        }
+
+        .feature-item img {
+            border-radius: 8px;
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .feature-item h4 {
+            font-size: 1.5rem;
+            color: var(--heading-color);
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        /* Price Table */
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .price-table th, .price-table td {
+            padding: 18px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .price-table thead th {
+            background-color: var(--primary-color);
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .price-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .price-table td:nth-child(1) {
+            font-weight: bold;
+            color: var(--heading-color);
+        }
+
+        .price-table td:not(:first-child) {
+            text-align: right;
+            font-size: 1.1rem;
+        }
+
+        .price-table tbody tr:hover {
+            background-color: #f1efec;
+        }
+        
+        /* Terms Section */
+        .terms-section h4 {
+            font-size: 1.3rem;
+            color: var(--heading-color);
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        
+        .terms-section h4:first-child {
+            margin-top: 0;
+        }
+
+        .terms-section ul {
+            padding-left: 20px;
+        }
+        .terms-section li {
+            position: relative;
+            padding-left: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .terms-section li::before {
+            content: '●';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        /* --- Footer (same as LP) --- */
+        .footer {
+            background-color: var(--heading-color);
+            color: #f0f0f0;
+            padding: 40px 0;
+            text-align: center;
+        }
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .footer p {
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .feature-grid { grid-template-columns: 1fr; }
+            .price-table th, .price-table td {
+                padding: 12px;
+                font-size: 0.85rem;
+            }
+            .price-table td:not(:first-child) {
+                font-size: 0.9rem;
+            }
+            .section {
+                padding: 30px 20px;
+            }
+            .page-title {
+                font-size: 2.5rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="header-container">
+            <a href="main.html" class="header-logo">PET SALON<span>Cheri</span></a>
+            <div class="header-right-group">
+                <nav class="header-nav">
+                    <ul>
+                        <li><a href="main.html">HOME</a></li>
+                        <li><a href="main.html#salon-info">サロン案内</a></li>
+                        <li><a href="Trimming.html">トリミング料金</a></li>
+                        <li><a href="hotel.html">ペットホテル料金</a></li>
+                        <li><a href="staff.html">スタッフ紹介</a></li>
+                        <li><a href="dog.html">スタッフ犬紹介</a></li>
+                        <li><a href="Contact.html">お問い合わせ</a></li>
+                    </ul>
+                </nav>
+                <div class="header-contact-info">
+                    <a href="tel:012-345-6789" class="header-tel">
+                        <i class="fas fa-phone-alt"></i> 012-345-6789
+                    </a>
+                    <div class="header-sns">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+             <div class="page-title-container">
+                 <div class="page-title-content">
+                    <h1 class="page-title">Pet Hotel Price</h1>
+                    <p class="page-subtitle">ペットホテル料金</p>
+                 </div>
+            </div>
+
+            <!-- Feature Section -->
+            <section class="section">
+                <h3 class="section-title-h3">安心・快適をお約束するこだわり</h3>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <img src="room.jpg" alt="清潔なペット用の個室">
+                        <h4>ケージレスで快適な完全個室</h4>
+                        <p>狭いケージではなく、広々とした個室でリラックス。他の子と接触することなく、安心して過ごせるプライベートな空間です。</p>
+                    </div>
+                    <div class="feature-item">
+                        <img src="dogrun.jpg" alt="犬が遊ぶドッグラン">
+                        <h4>のびのび遊べる室内ドッグラン</h4>
+                        <p>天候に左右されずにいつでも思いっきり遊べる、冷暖房完備の室内ドッグラン。滞在中の運動不足やストレスを解消します。</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Price Section -->
+            <section class="section">
+                <h3 class="section-title-h3">ご利用料金</h3>
+                <table class="price-table">
+                    <thead>
+                        <tr>
+                            <th>種類 / サイズ</th>
+                            <th>一時預かり (1時間)</th>
+                            <th>1泊2日 (24時間)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>小型犬 (~8kg)</td>
+                            <td>¥800~</td>
+                            <td>¥5,000~</td>
+                        </tr>
+                        <tr>
+                            <td>中型犬 (~20kg)</td>
+                            <td>¥1,000~</td>
+                            <td>¥6,500~</td>
+                        </tr>
+                         <tr>
+                            <td>大型犬 (20kg~)</td>
+                            <td>¥1,200~</td>
+                            <td>¥8,000~</td>
+                        </tr>
+                        <tr>
+                            <td>ネコ</td>
+                            <td>¥800~</td>
+                            <td>¥5,000~</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <!-- Terms Section -->
+            <section class="section terms-section">
+                <h3 class="section-title-h3">ご利用規約・注意事項</h3>
+                
+                <h4>お持ちいただくもの</h4>
+                <ul>
+                    <li>いつも食べているごはん（1食分ずつ小分けにしてください）</li>
+                    <li>リードと首輪（またはハーネス）</li>
+                    <li>お家のにおいが付いたおもちゃやタオル（わんちゃん・ねこちゃんが安心できます）</li>
+                    <li>(任意)おやつ</li>
+                </ul>
+
+                <h4>お預かりに際しての注意事項</h4>
+                <ul>
+                    <li>1年以内に狂犬病予防接種・混合ワクチン接種を済ませていることがお預かりの条件となります。受付時に証明書をご提示ください。</li>
+                    <li>ノミ・ダニの予防・駆除を定期的にお願いいたします。</li>
+                    <li>持病がある場合や投薬が必要な場合は、必ず事前にお申し出ください。</li>
+                    <li>著しく吠え続ける、噛み癖があるなど、他のお客様のご迷惑になると判断した場合は、お預かりをお断りすることがございます。</li>
+                    <li>チェックイン・チェックアウトは営業時間内（10:00〜19:00）にお願いいたします。</li>
+                </ul>
+                
+                <h4>キャンセルについて</h4>
+                <ul>
+                    <li>キャンセルや日程の変更は、ご予約日の3日前までにご連絡ください。</li>
+                    <li>当日のキャンセルにつきましては、ご利用料金の100%をキャンセル料として申し受けます。</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">PET SALON Cheri</div>
+            <p>&copy; 2025 PET SALON Cheri. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Header Scroll Effect ---
+            const header = document.querySelector('.header');
+            if(header){
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
